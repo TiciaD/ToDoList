@@ -3,7 +3,10 @@
 **Main Goal**: Create a To-Do list app that manages state and utilizes local storage to keep track of each to-do item.
 
 ### Things to Keep in Mind
-- 
+- Keep as few things in state as possible
+- Add local storage functionality towards the end
+- User should be able to check and uncheck a todo item
+- Should be automatically filtered to 'Show All' todo items
 
 ## MoSCoW
 Must Have
@@ -50,7 +53,7 @@ Won't Have
 
 ## Break Down Wireframe
 Embed Image
-![ToDoWireframe](todo-list/public/ToDoWireframe.png)
+![ToDoWireframe](/todo-list/public/ToDoWireframe.png)
 
 ## Classes
 ### Class Responsibility Collaborator (CRC)
