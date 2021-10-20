@@ -29,5 +29,55 @@ Could Have
 
 Won't Have
 - Won't use MySQL
-- Additional NPM packages used
+- Won't use additional NPM packages
 
+## Model View Controller (MVC)
+1. **Model** (stores data)
+    - store form input value by user as a to-do item
+    - store whether todo has been completed or not
+    - store amount of todo items added
+
+2. **View** (renders display)
+    - show tasks filtered by completed or not
+    - show task crossed out checked off when completed
+    - show count of number of todo items left
+    - OPTIONAL show new form submission if edit button selected
+
+3. **Controller** (handles input)
+    - handle click events for adding, deleting and completing a todo item
+    - handle click event for filtering the displayed todo items
+    - OPTIONAL handle click event for editing a todo item
+
+## Break Down Wireframe
+Embed Image
+
+
+## Classes
+### Class Responsibility Collaborator (CRC)
+```
+ToDoList                                                |
+                                                        |   ToDoForm
+renders list of todo items                              |   (Needs to know method for creating todos)
+manages state of added and deleted todos                |   
+contains methods for manipulating state,                |   ToDoItem
+i.e. creating and deleting new todos                    |   (Needs to know key and id assigned to it)
+                                                        |   OPTIONAL: (Needs to know methods for editing todo items)
+
+```
+```
+ToDoForm                                                    |                   
+                                                            |   ToDoList
+manages state of form input                                 |   (Passes method for creating todos down as prop)
+handles submission of form                                  |   (Needs to know value of form input after it's been submitted)
+uses method for creating new todo from ToDoList parent      |   
+                                                            |   
+
+```
+```
+ToDoItem                                                |                   
+                                                        |   ToDoList
+handles render of todo item                             |   (Passes key, id and todo value as props)
+handles click event for remove button                   |   (Passes method for removing todo item)
+OPTIONAL: handles form submission for editing todo      |   OPTIONAL: (Passes method for editing todo item)
+                                                        |
+```
