@@ -36,8 +36,8 @@ Won't Have
 
 ## Model View Controller (MVC)
 1. **Model** (stores data)
-    - store form input value by user as a to-do item
-    - store whether todo has been completed or not
+    - store form input value by user as a to-do item in state
+    - store whether todo has been completed/deleted
     - store amount of todo items added
 
 2. **View** (renders display)
@@ -90,10 +90,10 @@ OPTIONAL: handles form submission for editing todo      |   OPTIONAL: (Passes me
     - `ToDoList.state` ---> holds todo array to be filled with added todo items
     - createToDo(item) ---> function that sets state to add new todo item to state
     - removeToDo(id) ---> function that loops through state and changes isDeleted status of todo with matching id
-    - completeToDo(id) ---> function that loops through state and toggles isCompleted === true/false on marching id
+    - completeToDo(id) ---> function that loops through state and toggles isCompleted === true/false on matching id
     - generateKey() ---> function that returns a unique key based on Date and Time
     - `itemCount` ---> return todo array.length
-    - filterToDo(status) ---> function that loops through state and displays based on isCompleted and isDeleted status
+    - filterToDo(status) ---> function that loops through state and displays based on isCompleted and isDeleted status; *should this be in render()?*
     - ToDoList.render() ---> maps through ToDo components and sends props including:
     todo value, todo key/ids using generateKey(), and removeToDo()/completeToDo() methods
 
@@ -114,7 +114,7 @@ createToDo(item) {
     // set new state
     this.setState(
         // spread state, add new todo item to end of array
-        ...state.todos, todos: item
+        todos: ...state.todos, item
     )
 }
 
@@ -145,10 +145,19 @@ generateKey() {
 itemCount = state.todo.length
 
 filterToDo(status) {
-    IF status = 'completed'
+    IF status = 'Completed'
     // filter through todos and return the ones with isCompleted === true
     state.todos.filter(item.isCompleted === true)
+    state.todos.map(<ToDoItem/>)
+
+    IF status = 'Active'
+    // filter through todos and return the ones with isCompleted !== true
+    state.todos.filter(item.isCompleted !== true)
+    state.todos.map(<ToDoItem/>)
     
+    IF status = 'All'
+    // return all todos
+    state.todos.map(<ToDoItem/>)
 }
 
 ```
