@@ -50,7 +50,7 @@ Won't Have
 
 ## Break Down Wireframe
 Embed Image
-
+![ToDoWireframe](todo-list/public/ToDoWireframe.png)
 
 ## Classes
 ### Class Responsibility Collaborator (CRC)
@@ -86,9 +86,11 @@ OPTIONAL: handles form submission for editing todo      |   OPTIONAL: (Passes me
 - ToDoList
     - `ToDoList.state` ---> holds todo array to be filled with added todo items
     - createToDo(item) ---> function that sets state to add new todo item to state
-    - removeToDo(id) ---> function that loops through state and removes the todo with matching id
-    - completeToDo(id) ---> function that loops through state and toggles isCompleted === true/false
+    - removeToDo(id) ---> function that loops through state and changes isDeleted status of todo with matching id
+    - completeToDo(id) ---> function that loops through state and toggles isCompleted === true/false on marching id
     - generateKey() ---> function that returns a unique key based on Date and Time
+    - `itemCount` ---> return todo array.length
+    - filterToDo(status) ---> function that loops through state and displays based on isCompleted and isDeleted status
     - ToDoList.render() ---> maps through ToDo components and sends props including:
     todo value, todo key/ids using generateKey(), and removeToDo()/completeToDo() methods
 
@@ -103,3 +105,81 @@ OPTIONAL: handles form submission for editing todo      |   OPTIONAL: (Passes me
     - OPTIONAL: editForm() ---> toggle a new form to pop up when edit mode clicked
 
 ## Pseudocode
+ToDoList Functions
+```
+createToDo(item) {
+    // set new state
+    this.setState(
+        // spread state, add new todo item to end of array
+        ...state.todos, todos: item
+    )
+}
+
+removeToDo(id) {
+    // set new state
+    this.setState(
+        // filter through todos and find matching id
+        todos.filter(item.id === id)
+        // change value of isDeleted to true
+        item.isDeleted === true
+    )
+}
+
+completeToDo (id) {
+    this.setState(
+        // filter through todos and find matching id
+        todos.filter(item.id === id)
+        // change value of isCompleted to true
+        item.isCompleted === !isCompleted
+    )
+}
+
+generateKey() {
+    // set unique id to be date timestamp
+    new Date().getTime()
+}
+
+itemCount = state.todo.length
+
+filterToDo(status) {
+    IF status = 'completed'
+    // filter through todos and return the ones with isCompleted === true
+    state.todos.filter(item.isCompleted === true)
+    
+}
+
+```
+
+ToDoForm Functions
+```
+handleInput() {
+    // set new state for form everytime form changes
+    // reassign value of inputName to value of form
+    {inputName: e.target.value}
+}
+
+handleSubmit() {
+    // call createToDo() from props
+    // set new state
+    this.setState(
+        // spread state, add new todo item to end of array
+        ...state.todos, todos: item
+    )
+    // reset value of form to empty string
+    ?
+}
+```
+
+ToDoItem
+```
+handleRemove() {
+    // call removeToDo() from props
+    // set new state
+    this.setState(
+        // filter through todos and find matching id
+        todos.filter(item.id === id)
+        // change value of isDeleted to true
+        item.isDeleted === true
+    )
+}
+```
