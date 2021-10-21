@@ -31,28 +31,33 @@ class ToDoItem extends React.Component {
     
     render() {
         return(
-            <>
-                <li style={{
+            <div className="item row w-75" onMouseEnter={this.handleMouseOver} onMouseLeave={this.handleMouseOut}>
+                <div className="col-2">
+                    <input class="form-check-input" type="checkbox" id="checkboxNoLabel" onClick={this.handleToggle} value="" aria-label="..."/>
+                </div>
+                <div className="col-6" style={{
                     textDecoration: this.props.completed 
                     ? "line-through" 
                     : ""
-                }} onClick={this.handleToggle} onMouseEnter={this.handleMouseOver} onMouseLeave={this.handleMouseOut}>
+                }} 
+                onClick={this.handleToggle} 
+                >
                     {this.props.value}
-                </li>
-                <button type="button" className="btn btn-primary btn-sm"
+                </div>
+                <button type="button" className="col-2 btn btn-primary btn-sm"
                     style={{
                         display: this.state.isHovering 
                         ? "block" 
                         : "none"
-                    }}>Edit</button>
-                <button type="button" className="btn btn-danger btn-sm" 
+                    }}><i class="bi bi-pencil-square"></i></button>
+                <button type="button" className="col-2 btn btn-danger btn-sm" 
                     onClick={this.handleRemove}
                     style={{
                         display: this.state.isHovering 
                         ? "block" 
                         : "none"
-                    }}>Delete</button>
-            </>
+                    }}><i class="bi bi-trash-fill"></i></button>
+            </div>
         )
     }
 }

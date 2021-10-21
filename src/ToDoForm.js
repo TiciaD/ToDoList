@@ -31,22 +31,22 @@ class ToDoForm extends React.Component {
   render() {
     // View
     return (
-        <div className="row">
-                <form onSubmit={this.handleSubmit}>
-                    <div className="col-6">
-                        <input 
-                        className="form-control" 
-                        type="text" 
-                        value={this.state.value} 
-                        onChange={this.handleChange} 
-                        placeholder="Add Your New To-Do" 
-                        aria-label="default input example"
-                        />
-                    </div>
-                    <div className="col-6">
-                        <button type="submit" className="btn btn-primary"><i className="bi bi-plus"></i></button>
-                    </div>
-                </form>
+        <div>
+            <form className="row mb-4" onSubmit={this.handleSubmit}>
+                <div className="col-10 padding-0">
+                    <input 
+                    className="form-control" 
+                    type="text" 
+                    value={this.state.value} 
+                    onChange={this.handleChange} 
+                    placeholder="Add  Your  New  To-Do" 
+                    aria-label="default input example"
+                    />
+                </div>
+                <div className="col-2 padding-0">
+                    <button type="submit" className="btn btn-primary"><i className="bi bi-plus"></i></button>
+                </div>
+            </form>
         </div>
     );
   }

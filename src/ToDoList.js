@@ -86,7 +86,7 @@ class ToDoList extends React.Component {
 
         return (
             <div>
-                <h1>To-Do List</h1>
+                <h1 className="fs-1 mb-3">To-Do List</h1>
                 <ToDoForm createToDo={this.createToDo} genKey={this.generateKey}/>
                 <ul>
                     {filteredTodos.map((item) => (
@@ -100,20 +100,22 @@ class ToDoList extends React.Component {
                         ))
                     }
                 </ul>
-                <div>To-Dos Left: {this.state.todos.filter((todo) => todo.isCompleted === false && todo.isDeleted === false).length}</div>
-                <div className="btn-group" role="group" aria-label="Basic radio toggle button group">
-                    <input type="radio" className="btn-check" onClick={() => this.filterToDo('all')} name="btnradio" id="btnradio1" autoComplete="off" defaultChecked/>
-                    <label className="btn btn-outline-primary" htmlFor="btnradio1">All</label>
+                <div>
+                    <div>To-Dos Left: {this.state.todos.filter((todo) => todo.isCompleted === false && todo.isDeleted === false).length}</div>
+                    <div className="btn-group" role="group" aria-label="Basic radio toggle button group">
+                        <input type="radio" className="btn-check" onClick={() => this.filterToDo('all')} name="btnradio" id="btnradio1" autoComplete="off" defaultChecked/>
+                        <label className="btn btn-outline-primary" htmlFor="btnradio1">All</label>
 
-                    <input type="radio" className="btn-check" onClick={() => this.filterToDo('active')} name="btnradio" id="btnradio2" autoComplete="off"/>
-                    <label className="btn btn-outline-primary" htmlFor="btnradio2">Active</label>
+                        <input type="radio" className="btn-check" onClick={() => this.filterToDo('active')} name="btnradio" id="btnradio2" autoComplete="off"/>
+                        <label className="btn btn-outline-primary" htmlFor="btnradio2">Active</label>
 
-                    <input type="radio" className="btn-check" onClick={() => this.filterToDo('complete')} name="btnradio" id="btnradio3" autoComplete="off"/>
-                    <label className="btn btn-outline-primary" htmlFor="btnradio3">Completed</label>
+                        <input type="radio" className="btn-check" onClick={() => this.filterToDo('complete')} name="btnradio" id="btnradio3" autoComplete="off"/>
+                        <label className="btn btn-outline-primary" htmlFor="btnradio3">Completed</label>
+                    </div>
+                    <button type="button" className="btn btn-danger" onClick={() => this.removeAllCompleted()}>Clear Completed</button>
+                    <input type="checkbox" className="btn-check" onClick={() => this.completeAll()} id="btn-check-outlined" autoComplete="off"/>
+                    <label className="btn btn-outline-primary" htmlFor="btn-check-outlined">Complete All</label>
                 </div>
-                <button type="button" className="btn btn-danger" onClick={() => this.removeAllCompleted()}>Clear Completed</button>
-                <input type="checkbox" className="btn-check" onClick={() => this.completeAll()} id="btn-check-outlined" autoComplete="off"/>
-                <label className="btn btn-outline-primary" htmlFor="btn-check-outlined">Complete All</label>
             </div>
         )
     }
