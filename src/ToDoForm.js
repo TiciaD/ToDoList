@@ -1,4 +1,5 @@
 import React from "react";
+import './ToDoForm.css';
 
 class ToDoForm extends React.Component {
   constructor(props) {
@@ -30,17 +31,23 @@ class ToDoForm extends React.Component {
   render() {
     // View
     return (
-      <form onSubmit={this.handleSubmit}>
-        <input 
-        className="form-control" 
-        type="text" 
-        value={this.state.value} 
-        onChange={this.handleChange} 
-        placeholder="Add Your New To-Do" 
-        aria-label="default input example"
-        />
-        <button type="submit">+</button>
-      </form>
+        <div className="row">
+                <form onSubmit={this.handleSubmit}>
+                    <div className="col-6">
+                        <input 
+                        className="form-control" 
+                        type="text" 
+                        value={this.state.value} 
+                        onChange={this.handleChange} 
+                        placeholder="Add Your New To-Do" 
+                        aria-label="default input example"
+                        />
+                    </div>
+                    <div className="col-6">
+                        <button type="submit" className="btn btn-primary"><i className="bi bi-plus"></i></button>
+                    </div>
+                </form>
+        </div>
     );
   }
 }

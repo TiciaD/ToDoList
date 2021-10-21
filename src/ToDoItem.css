@@ -1,0 +1,5 @@
+li {
+    list-style-type: none;
+    border: 2px solid rgba(0, 0, 0, 0.42);
+    box-sizing: border-box;
+}

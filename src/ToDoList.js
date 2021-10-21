@@ -1,16 +1,19 @@
 import React from 'react';
 import ToDoForm from './ToDoForm';
 import ToDoItem from './ToDoItem';
+import './ToDoList.css';
 
 class ToDoList extends React.Component {
     constructor(props) {
         // Model
         super(props);
-        this.state = {todos: [], filter: 'all'};
+        this.state = {todos: [], filter: 'all', allComplete: true};
         this.createToDo = this.createToDo.bind(this);
         this.generateKey = this.generateKey.bind(this);
         this.removeToDo = this.removeToDo.bind(this);
         this.toggleComplete = this.toggleComplete.bind(this);
+        this.removeAllCompleted = this.removeAllCompleted.bind(this);
+        this.completeAll = this.completeAll.bind(this);
     };
 
 
@@ -30,7 +33,6 @@ class ToDoList extends React.Component {
             if (todo.id === id) {
                 todo.isDeleted = true
             }
-            console.log(todo)
         return todo;
         });
         this.setState({todos: deletedToDos})
@@ -39,20 +41,36 @@ class ToDoList extends React.Component {
     toggleComplete(id) {
         const completedToDos = this.state.todos.map((todo) => {
             if (todo.id === id) {
-                console.log(todo);
                 return {...todo, isCompleted: !todo.isCompleted}
             } else {
                 return todo;
             }
         });
-        this.setState({todos: completedToDos})
-    }
+        this.setState({todos: completedToDos});
+    };
 
     filterToDo(string) {
-        this.setState({
-            filter: string
-        })
+        this.setState({filter: string});
+    };
+
+    removeAllCompleted() {
+        const allDeleted = this.state.todos.filter((todo) => {
+            if(todo.isCompleted === true) {
+                todo.isDeleted = true;
+            }
+            return todo
+        });
+        this.setState({todos: allDeleted});
+    };
+
+    completeAll() {
+        const allCompleted = this.state.todos.map((todo) => {
+            return {...todo, isCompleted: this.state.allComplete}
+        });
+        this.setState({todos: allCompleted, allComplete: !this.state.allComplete});
     }
+
+
 
     render() {
         // View
@@ -82,12 +100,20 @@ class ToDoList extends React.Component {
                         ))
                     }
                 </ul>
-                <div>To-Dos Left: {this.state.todos.filter((todo) => todo.isCompleted === false).length}</div>
-                <div className="btn-group" role="group" aria-label="Basic example">
-                    <button type="button" onClick={() => this.filterToDo('all')} className="btn btn-primary">All</button>
-                    <button type="button" onClick={() => this.filterToDo('active')} className="btn btn-primary">Active</button>
-                    <button type="button" onClick={() => this.filterToDo('complete')} className="btn btn-primary">Completed</button>
+                <div>To-Dos Left: {this.state.todos.filter((todo) => todo.isCompleted === false && todo.isDeleted === false).length}</div>
+                <div className="btn-group" role="group" aria-label="Basic radio toggle button group">
+                    <input type="radio" className="btn-check" onClick={() => this.filterToDo('all')} name="btnradio" id="btnradio1" autoComplete="off" defaultChecked/>
+                    <label className="btn btn-outline-primary" htmlFor="btnradio1">All</label>
+
+                    <input type="radio" className="btn-check" onClick={() => this.filterToDo('active')} name="btnradio" id="btnradio2" autoComplete="off"/>
+                    <label className="btn btn-outline-primary" htmlFor="btnradio2">Active</label>
+
+                    <input type="radio" className="btn-check" onClick={() => this.filterToDo('complete')} name="btnradio" id="btnradio3" autoComplete="off"/>
+                    <label className="btn btn-outline-primary" htmlFor="btnradio3">Completed</label>
                 </div>
+                <button type="button" className="btn btn-danger" onClick={() => this.removeAllCompleted()}>Clear Completed</button>
+                <input type="checkbox" className="btn-check" onClick={() => this.completeAll()} id="btn-check-outlined" autoComplete="off"/>
+                <label className="btn btn-outline-primary" htmlFor="btn-check-outlined">Complete All</label>
             </div>
         )
     }

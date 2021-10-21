@@ -87,7 +87,7 @@ OPTIONAL: handles form submission for editing todo      |   OPTIONAL: (Passes me
 
 ## Define Objects and Functions
 - ToDoList
-    - `ToDoList.state` ---> holds todo array to be filled with added todo items
+    - `ToDoList.state` ---> holds todo array to be filled with added todo items, holds filter status
     - createToDo(item) ---> function that sets state to add new todo item to state
     - removeToDo(id) ---> function that loops through state and changes isDeleted status of todo with matching id
     - completeToDo(id) ---> function that loops through state and toggles isCompleted === true/false on matching id
