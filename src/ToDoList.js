@@ -6,7 +6,7 @@ class ToDoList extends React.Component {
     constructor(props) {
         // Model
         super(props);
-        this.state = {todos: []}
+        this.state = {todos: [], filter: 'all'};
         this.createToDo = this.createToDo.bind(this);
         this.generateKey = this.generateKey.bind(this);
         this.removeToDo = this.removeToDo.bind(this);
@@ -30,6 +30,7 @@ class ToDoList extends React.Component {
             if (todo.id === id) {
                 todo.isDeleted = true
             }
+            console.log(todo)
         return todo;
         });
         this.setState({todos: deletedToDos})
@@ -38,45 +39,55 @@ class ToDoList extends React.Component {
     toggleComplete(id) {
         const completedToDos = this.state.todos.map((todo) => {
             if (todo.id === id) {
-                todo.isCompleted = !todo.isCompleted
+                console.log(todo);
+                return {...todo, isCompleted: !todo.isCompleted}
+            } else {
+                return todo;
             }
-        return todo;
         });
         this.setState({todos: completedToDos})
     }
 
-    filterToDo() {
-        const filters = {
-            All: () => true,
-            Active: task => !task.completed,
-            Completed: task => task.completed
-        };
+    filterToDo(string) {
+        this.setState({
+            filter: string
+        })
     }
 
     render() {
         // View
-        const newToDo = this.state.todos.map((item) => {
-            console.log(item);
-            return (
-                <ToDoItem 
-                key={item.id}
-                id={item.id}
-                value={item.value}
-                completed={item.isCompleted}
-                remove={this.removeToDo}
-                complete={this.toggleComplete}/>
-            )
-        });
+        let filteredTodos = [];
+        if(this.state.filter === 'all') {
+            filteredTodos = this.state.todos.filter((todo) => todo.isDeleted === false);
+        } else if (this.state.filter === 'active') {
+            filteredTodos = this.state.todos.filter((todo) => todo.isCompleted === false && todo.isDeleted === false)
+        } else if (this.state.filter === 'complete') {
+            filteredTodos = this.state.todos.filter((todo) => todo.isCompleted === true && todo.isDeleted === false)
+        }
 
-        // const filtered = this.state.todos.filter((item) => {
-
-        // })
 
         return (
             <div>
                 <h1>To-Do List</h1>
                 <ToDoForm createToDo={this.createToDo} genKey={this.generateKey}/>
-                <ul>{newToDo}</ul>
+                <ul>
+                    {filteredTodos.map((item) => (
+                        <ToDoItem 
+                        key={item.id}
+                        id={item.id}
+                        value={item.value}
+                        completed={item.isCompleted}
+                        remove={this.removeToDo}
+                        toggleComplete={this.toggleComplete}/>
+                        ))
+                    }
+                </ul>
+                <div>To-Dos Left: {this.state.todos.filter((todo) => todo.isCompleted === false).length}</div>
+                <div className="btn-group" role="group" aria-label="Basic example">
+                    <button type="button" onClick={() => this.filterToDo('all')} className="btn btn-primary">All</button>
+                    <button type="button" onClick={() => this.filterToDo('active')} className="btn btn-primary">Active</button>
+                    <button type="button" onClick={() => this.filterToDo('complete')} className="btn btn-primary">Completed</button>
+                </div>
             </div>
         )
     }

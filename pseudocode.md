@@ -118,6 +118,7 @@ createToDo(item) {
     )
 }
 
+
 removeToDo(id) {
     // set new state
     this.setState(
@@ -128,6 +129,7 @@ removeToDo(id) {
     )
 }
 
+
 completeToDo (id) {
     this.setState(
         // filter through todos and find matching id
@@ -137,12 +139,15 @@ completeToDo (id) {
     )
 }
 
+
 generateKey() {
     // set unique id to be date timestamp
     new Date().getTime()
 }
 
+
 itemCount = state.todo.length
+
 
 filterToDo(status) {
     IF status = 'Completed'
@@ -169,6 +174,7 @@ handleInput() {
     // reassign value of inputName to value of form
     {inputName: e.target.value}
 }
+
 
 handleSubmit() {
     // call createToDo() from props

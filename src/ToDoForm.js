@@ -32,7 +32,7 @@ class ToDoForm extends React.Component {
     return (
       <form onSubmit={this.handleSubmit}>
         <input 
-        class="form-control" 
+        className="form-control" 
         type="text" 
         value={this.state.value} 
         onChange={this.handleChange} 
