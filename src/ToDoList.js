@@ -25,6 +25,8 @@ class ToDoList extends React.Component {
             // add new array to state
             todos: [...this.state.todos, item]
         });
+        let stringify = JSON.stringify(item.value);
+        localStorage.setItem(item.id, stringify);
     };
 
     generateKey() {
@@ -157,6 +159,9 @@ class ToDoList extends React.Component {
                                 <div className="col-12">
                                     <input type="checkbox" className="btn-check" onClick={() => this.completeAll()} id="btn-check-outlined" autoComplete="off"/>
                                     <label className="btn btn-outline-primary" htmlFor="btn-check-outlined">Complete All</label>
+                                </div>
+                                <div className="col-md-12 gy-1">
+                                    <button type="button" className="btn btn-outline-primary">Restore To-Dos</button>
                                 </div>
                             </div>
                         </div>

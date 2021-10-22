@@ -123,8 +123,8 @@ createToDo(item) {
 removeToDo(id) {
     // set new state
     this.setState(
-        // filter through todos and find matching id
-        todos.filter(item.id === id)
+        // loop through todos and find matching id
+        todos.map(item.id === id)
         // change value of isDeleted to true
         item.isDeleted === true
     )
@@ -185,7 +185,7 @@ handleSubmit() {
         ...state.todos, todos: item
     )
     // reset value of form to empty string
-    ?
+    inputValue = ''
 }
 ```
 
@@ -200,5 +200,13 @@ handleRemove() {
         // change value of isDeleted to true
         item.isDeleted === true
     )
+}
+
+
+OPTIONAL: 
+handleEdit(id, update) {
+    todos.map(item.id === id)
+        // change value to update
+        ...item, value: update
 }
 ```
