@@ -25,8 +25,6 @@ class ToDoList extends React.Component {
             // add new array to state
             todos: [...this.state.todos, item]
         });
-        let stringify = JSON.stringify(item.value);
-        localStorage.setItem(item.id, stringify);
     };
 
     generateKey() {
@@ -80,7 +78,7 @@ class ToDoList extends React.Component {
 
     completeAll() {
         const allCompleted = this.state.todos.map((todo) => {
-            // for all todos, destructure array and change complete value to allComplete value
+            // for all todos, destructure object and change complete value to allComplete value
             return {...todo, isCompleted: this.state.allComplete}
         });
         // add new array to state
@@ -90,12 +88,36 @@ class ToDoList extends React.Component {
 
     updateTodo(id, update) {
         const updatedTodos = this.state.todos.map(todo => {
-        if (todo.id === id) {
-            return { ...todo, value: update };
-        }
-        return todo;
+            // find todo with matching id
+            if (todo.id === id) {
+                // destructure object and change value to updated value
+                return { ...todo, value: update };
+            }
+            // return new todo
+            return todo;
         });
+        // add new array to state
         this.setState({todos: updatedTodos});
+    };
+
+    componentDidMount() {
+        // check if data is in local storage
+        if ("to-do-data" in localStorage) {
+            // set variable for localstorage item
+            const value = localStorage.getItem("to-do-data");
+            // set variable for parsed value of localstorage item
+            let parsedValue = JSON.parse(value);
+            // set state of current todos as parsed localStorage items
+            this.setState({todos: parsedValue});
+            alert('added to state!');
+        }
+    };
+
+    componentDidUpdate() {
+        // stringify array of todos on every update
+        let stringifyTodos = JSON.stringify(this.state.todos);
+        // send stringified array to local storage on every update
+        localStorage.setItem('to-do-data', stringifyTodos);
     };
 
 
@@ -161,7 +183,7 @@ class ToDoList extends React.Component {
                                     <label className="btn btn-outline-primary" htmlFor="btn-check-outlined">Complete All</label>
                                 </div>
                                 <div className="col-md-12 gy-1">
-                                    <button type="button" className="btn btn-outline-primary">Restore To-Dos</button>
+                                    <button type="button" className="btn btn-outline-primary" onClick={() => this.filterToDo('deleted')}>View Deleted To-Dos</button>
                                 </div>
                             </div>
                         </div>
