@@ -13,18 +13,26 @@ class ToDoForm extends React.Component {
 
   // Controller
   handleChange(event) {
+      // change state value every time value of form is changed
     this.setState({value: event.target.value});
   };
 
   handleSubmit(event) {
-    alert('submitted: ' + this.state.value);
+      // call createToDo function from props
     this.props.createToDo({
+        // destructure state to add other objects
         ...this.state, 
+        // set id to result of genKey prop
         id: this.props.genKey(), 
+        // set completed value to false
         isCompleted: false, 
+        // set deleted value to false
         isDeleted: false
     });
+    // prevent default action of submit event
     event.preventDefault();
+    // reset state back to empty string
+    // remove value from form after submitted
     this.setState({value: ''});
   };
 
@@ -32,7 +40,7 @@ class ToDoForm extends React.Component {
     // View
     return (
         <div>
-            <form className="row mb-4" onSubmit={this.handleSubmit}>
+            <form className="row g-1 mb-4" onSubmit={this.handleSubmit}>
                 <div className="col-10 padding-0">
                     <input 
                     className="form-control" 
@@ -44,7 +52,7 @@ class ToDoForm extends React.Component {
                     />
                 </div>
                 <div className="col-2 padding-0">
-                    <button type="submit" className="btn btn-primary"><i className="bi bi-plus"></i></button>
+                    <button type="submit" className="btn btn-primary">Add</button>
                 </div>
             </form>
         </div>

@@ -41,14 +41,15 @@ Won't Have
     - store amount of todo items added
 
 2. **View** (renders display)
-    - show tasks filtered by completed or not
-    - show task crossed out checked off when completed
+    - show todos filtered by completed or not
+    - show todo crossed out/checked off when completed
     - show count of number of todo items left
+    - show remove button for each todo item
     - OPTIONAL show new form submission if edit button selected
 
 3. **Controller** (handles input)
     - handle click events for adding, deleting and completing a todo item
-    - handle click event for filtering the displayed todo items
+    - handle click event for different filters for the displayed todo items
     - OPTIONAL handle click event for editing a todo item
 
 ## Break Down Wireframe
@@ -58,23 +59,23 @@ Embed Image
 ## Classes
 ### Class Responsibility Collaborator (CRC)
 ```
-ToDoList                                                    |
-                                                            |   ToDoForm
-renders list of todo items                                  |   (Needs to know method for creating todos)
-manages state of added and deleted todos                    |   
-contains methods for manipulating state,                    |   ToDoItem
-i.e. creating and deleting new todos                        |   (Needs to know key, id, value and isCompleted assigned to it)
-contains method for changing completion state               |   (Needs to know method for completing a todo item)
-Has method for filtering which todo items are displayed     |   OPTIONAL: (Needs to know methods for editing todo items)
-                                                            |
+ToDoList                                                |
+                                                        |   ToDoForm
+renders list of todo items                              |   (Needs to know method for creating todos)
+manages state of added and deleted todos                |   
+contains methods for manipulating state,                |   ToDoItem
+i.e. creating and deleting new todos                    |   (Needs to know key, id, value and isCompleted assigned to it)
+contains method for changing completion state           |   (Needs to know method for completing a todo item)
+Has method for filtering which todo items are displayed |   OPTIONAL: (Needs to know methods for editing todo items)
+                                                        |
 ```
 ```
-ToDoForm                                                    |                   
-                                                            |   ToDoList
-manages state of form input                                 |   (Passes method for creating todos down as prop)
-handles submission of form                                  |   (Needs to know value of form input after it's been submitted)
-uses method for creating new todo from ToDoList parent      |   
-                                                            |   
+ToDoForm                                                |                   
+                                                        |   ToDoList
+manages state of form input                             |   (Passes method for creating todos down as prop)
+handles submission of form                              |   (Needs to know value of form input after it's been submitted)
+uses method for creating new todo from ToDoList parent  |   
+                                                        |   
 ```
 ```
 ToDoItem                                                |                   
