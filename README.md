@@ -11,5 +11,5 @@ By default, the app should display the items on the to-do list and list their ac
 - SCSS
 - Bootstrap
 - JS
-- React
+- React (class-based)
 
